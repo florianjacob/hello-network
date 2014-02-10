@@ -1,17 +1,20 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QtQml>
 
 #include "client.h"
 
 int main(int argc, char* argv[])
 {
+	Q_INIT_RESOURCE(qmlfiles);
+
 	QApplication app(argc, argv);
 	QQmlApplicationEngine engine;
 	Client client;
 
 	engine.rootContext()->setContextProperty("client", &client);
-	engine.load("client.qml");
+	engine.load(QUrl("qrc:/client.qml"));
 
 	/*
 	 * Glueing everything together is done in QML here, but
